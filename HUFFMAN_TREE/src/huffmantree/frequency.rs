@@ -4,8 +4,8 @@ use std::cmp::PartialEq;
 
 #[derive(PartialEq, PartialOrd)]
 pub struct Frequency {
-    frequency_ : i32,
-    charactor_ : char
+    pub frequency_ : i32,
+    pub charactor_ : char
 }
 
 impl Frequency {
@@ -13,15 +13,15 @@ impl Frequency {
         Frequency { frequency_: (freq), charactor_: ('\0') }
     }
 
-    pub fn InitWithCharAndInt(c : char, freq : i32) -> Frequency {
+    pub fn init_with_char_and_int(c : char, freq : i32) -> Frequency {
         Frequency { frequency_: (freq), charactor_: (c) }
     }
 
-    pub fn getCharactor(&self) -> char {
+    pub fn get_charactor(&self) -> char {
         self.charactor_
     }
 
-    pub fn getFrequancy(&self) -> i32 {
+    pub fn get_frequancy(&self) -> i32 {
         self.frequency_
     }
 
