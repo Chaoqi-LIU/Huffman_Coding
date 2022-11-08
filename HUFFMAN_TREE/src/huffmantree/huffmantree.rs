@@ -2,15 +2,26 @@ use std::collections::HashMap;
 use crate::huffmantree::frequency::Frequency;
 
 pub struct TreeNode {
-    // todo
-    x : f32
+    freq : Frequency,
+    left : Option<Box<TreeNode>>,
+    right : Option<Box<TreeNode>>,
 }
 
 impl TreeNode {
     pub fn new() -> TreeNode {
-        TreeNode { x: (0.0) }
+        TreeNode { freq : Frequency::new(0), left : None, right : None, }
+    }
+
+    pub fn Init(theFreq : Frequency) -> TreeNode {
+        TreeNode { freq : theFreq, left : None, right : None, }
+    }
+
+    pub fn InitWithInt(frequency : i32) -> TreeNode {
+        TreeNode { freq : Frequency::InitWithCharAndInt('\0', frequency), left : None, right : None, }       
     }
 }
+
+
 
 static _max_print_height: usize = 9;
 
@@ -27,15 +38,16 @@ impl HuffmanTree {
         }
     }
 
-    // pub fn new(bfile : BinaryFileReader) -> HuffmanTree { 
+    pub fn CopyConstructor(other : HuffmanTree) -> HuffmanTree {
+        HuffmanTree {
+            root_ : other.root_,
+            bitsMap_ : other.bitsMap_,
+        }
+    }
+
+    // pub fn ReadFromBFile(bfile : BinaryFileReader) -> HuffmanTree { 
     //     todo!();
     // } 
 
-    // // copy constructor
-    // pub fn new(other : HuffmanTree) -> HuffmanTree {
-    //     Self {
-    //         root_ : other.root_,
-    //         bitsMap_ : other.bitsMap_,
-    //     }
-    // }
+    
 }
