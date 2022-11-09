@@ -1,9 +1,12 @@
 [package]
 name = "HUFFMAN_TREE"
-version = "0.1.0"
-edition = "2021"
+authors = ["Chaoqi LIU <chaoqil2@illinois.edu>", "Jiahui Lin <jiahui9@illinois.edu>"]
+version = "9.9.9"
+edition = "2022"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-queues = "1.0.2"
+bitbit = "*"
+serde = { version = "1.0.104", features = ["derive"] }
+serde_json = "1.0.48"
