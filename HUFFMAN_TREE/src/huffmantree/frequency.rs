@@ -1,8 +1,9 @@
 use std::cmp::Ordering;
 use std::cmp::PartialEq;
-use std::ops;
+use serde::{ Deserialize, Serialize };
 
-#[derive(PartialEq, PartialOrd)]
+
+#[derive(PartialEq, PartialOrd, Debug, Serialize, Deserialize)]
 pub struct Frequency {
     pub frequency_ : i32,
     pub charactor_ : char
@@ -32,8 +33,4 @@ impl Frequency {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         self.frequency_.partial_cmp(&other.frequency_)
     }
-
-    // fn add(&self, _rhs: &Self) -> Frequency {
-           
-    // }
 }

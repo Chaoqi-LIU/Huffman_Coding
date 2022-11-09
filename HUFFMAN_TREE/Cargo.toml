@@ -1,10 +1,8 @@
 [package]
 name = "HUFFMAN_TREE"
 authors = ["Chaoqi LIU <chaoqil2@illinois.edu>", "Jiahui Lin <jiahui9@illinois.edu>"]
-version = "9.9.9"
-edition = "2022"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+version = "0.1.0"
+edition = "2021"
 
 [dependencies]
 bitbit = "*"

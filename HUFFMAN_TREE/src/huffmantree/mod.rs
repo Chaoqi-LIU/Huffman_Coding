@@ -1,3 +1,3 @@
-pub mod ptr_huffmantree;
+pub mod huffmantree;
 pub mod frequency;
 pub mod treenode;
