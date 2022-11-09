@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::cmp::PartialEq;
-
+use std::ops;
 
 #[derive(PartialEq, PartialOrd)]
 pub struct Frequency {
@@ -32,4 +32,8 @@ impl Frequency {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         self.frequency_.partial_cmp(&other.frequency_)
     }
+
+    // fn add(&self, _rhs: &Self) -> Frequency {
+           
+    // }
 }
