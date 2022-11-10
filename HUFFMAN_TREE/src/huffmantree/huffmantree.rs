@@ -139,18 +139,18 @@ impl HuffmanTree {
         // }
         self.build_map(self.root_, &mut Vec::new());
 
-        for mp in &self.bits_map_ {
-            println!("========");
-            println!("char: {}, freq: {}", mp.0, map[&mp.0.as_str().chars().nth(0).unwrap()]);
-            for d in mp.1 {
-                if *d {
-                    print!("1 ");
-                } else {
-                    print!("0 ");
-                }
-            }
-            println!();
-        }
+        // for mp in &self.bits_map_ {
+        //     println!("========");
+        //     println!("char: {}, freq: {}", mp.0, map[&mp.0.as_str().chars().nth(0).unwrap()]);
+        //     for d in mp.1 {
+        //         if *d {
+        //             print!("1 ");
+        //         } else {
+        //             print!("0 ");
+        //         }
+        //     }
+        //     println!();
+        // }
 
         // let mut x : usize = self.root_;
         // let mut y : usize = self.root_;
