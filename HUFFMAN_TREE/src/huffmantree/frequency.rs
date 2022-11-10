@@ -6,20 +6,20 @@ use serde::{ Deserialize, Serialize };
 #[derive(PartialEq, PartialOrd, Debug, Serialize, Deserialize)]
 pub struct Frequency {
     pub frequency_ : i32,
-    pub charactor_ : char
+    pub charactor_ : String
 }
 
 impl Frequency {
     pub fn new(freq : i32) -> Frequency {
-        Frequency { frequency_: (freq), charactor_: ('\0') }
+        Frequency { frequency_: (freq), charactor_: (String::from("")) }
     }
 
-    pub fn init_with_char_and_int(c : char, freq : i32) -> Frequency {
+    pub fn init_with_char_and_int(c : String, freq : i32) -> Frequency {
         Frequency { frequency_: (freq), charactor_: (c) }
     }
 
-    pub fn get_charactor(&self) -> char {
-        self.charactor_
+    pub fn get_charactor(&self) -> String {
+        self.charactor_.clone()
     }
 
     pub fn get_frequancy(&self) -> i32 {
