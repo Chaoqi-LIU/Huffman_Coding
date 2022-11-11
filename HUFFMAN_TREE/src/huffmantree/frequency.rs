@@ -1,9 +1,8 @@
 use std::cmp::Ordering;
 use std::cmp::PartialEq;
-use serde::{ Deserialize, Serialize };
 
 
-#[derive(PartialEq, PartialOrd, Debug, Serialize, Deserialize)]
+#[derive(PartialEq, PartialOrd, Debug)]
 pub struct Frequency {
     pub frequency_ : i32,
     pub charactor_ : String
