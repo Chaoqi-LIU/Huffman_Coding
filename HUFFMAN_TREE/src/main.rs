@@ -7,12 +7,6 @@ mod coder;
 use crate::bfile::bfile::*;
 mod bfile;
 
-use std::fs;
-use std::fs::File;
-use std::rc::Rc;
-use std::io::prelude::*;
-use std::io::{Write, BufReader, BufRead, Error};
-
 pub fn main() {
 
     let mut ht = HuffmanTree::new();

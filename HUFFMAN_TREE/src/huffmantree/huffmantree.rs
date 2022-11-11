@@ -1,4 +1,3 @@
-use serde::{ Deserialize, Serialize };
 use std::collections::HashMap;
 
 use crate::huffmantree::frequency::Frequency;
@@ -6,7 +5,7 @@ use crate::huffmantree::treenode::TreeNode;
 
 use crate::bfile::bfile::*;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug)]
 pub struct HuffmanTree {
     nodes : Vec<TreeNode>,
     idx : usize,

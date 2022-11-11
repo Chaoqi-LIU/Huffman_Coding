@@ -2,7 +2,7 @@ use crate::huffmantree::huffmantree::HuffmanTree;
 
 use std::fs;
 use std::fs::File;
-use std::io::{Write, BufReader, BufRead, Error};
+use std::io::{Write, Error};
 
 pub fn read_from_file(file : &str) -> String {
     return fs::read_to_string(file).unwrap();
@@ -14,17 +14,6 @@ pub fn write_to_file(file : &str, content : String) -> Result<(), Error> {
 }
 
 pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<(), Error> {
-    // let mut idx : usize = 0;
-    // let file = File::open(file)?;
-    // let reader = BufReader::new(file);
-    // for line in reader.lines() {
-    //     if let Ok(line) = line {
-    //         let comps : Vec<&str> = line.split("|").collect();
-    //         idx = huffman_tree.insert(comps[2].to_string().parse::<i32>().unwrap(), comps[3].to_string());
-    //         huffman_tree.set_left(idx, comps[0].to_string().parse::<usize>().unwrap());
-    //         huffman_tree.set_right(idx, comps[1].to_string().parse::<usize>().unwrap());
-    //     }
-    // }
     let mut idx : usize = 0;
     let mut reader = fs::read_to_string(file).unwrap();
     reader.pop();
