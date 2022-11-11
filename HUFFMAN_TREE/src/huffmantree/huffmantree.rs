@@ -1,19 +1,14 @@
 use serde::{ Deserialize, Serialize };
-use serde_json::to_string;
 use std::collections::HashMap;
-
-use std::fs;
-use std::fs::File;
-use std::rc::Rc;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
 
-use super::frequency;
+use crate::bfile::bfile::*;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct HuffmanTree {
-    pub nodes : Vec<TreeNode>,
+    nodes : Vec<TreeNode>,
     idx : usize,
     root_ : usize,
     bits_map_ : HashMap<String, Vec<bool>>,
@@ -62,7 +57,6 @@ impl HuffmanTree {
         } else {
             to_return = merged_queue[0]; merged_queue.remove(0);
         }
-        // println!("to_return: {}", to_return);
         return to_return;
     }
     
@@ -77,12 +71,12 @@ impl HuffmanTree {
         while single_queue.len() + merged_queue.len() >= 2 {
             let left = self.remove_smallest(&mut single_queue, &mut merged_queue);
             let right = self.remove_smallest(&mut single_queue, &mut merged_queue);
-            println!("=========");
-            println!("left -- char: {}, freq: {}", self.nodes[left].freq_.get_charactor(), self.nodes[left].freq_.get_frequancy());
-            println!("right -- char: {}, freq: {}", self.nodes[right].freq_.get_charactor(), self.nodes[right].freq_.get_frequancy());
+            // println!("=========");
+            // println!("left -- char: {}, freq: {}", self.nodes[left].freq_.get_charactor(), self.nodes[left].freq_.get_frequancy());
+            // println!("right -- char: {}, freq: {}", self.nodes[right].freq_.get_charactor(), self.nodes[right].freq_.get_frequancy());
             let cur = self.insert(self.nodes[left].freq_.get_frequancy() + self.nodes[right].freq_.get_frequancy(), 
                                             String::from(self.nodes[left].freq_.get_charactor() + &self.nodes[right].freq_.get_charactor()));
-            println!("parent -- char: {}, freq: {}", self.nodes[cur].freq_.get_charactor(), self.nodes[cur].freq_.get_frequancy());
+            // println!("parent -- char: {}, freq: {}", self.nodes[cur].freq_.get_charactor(), self.nodes[cur].freq_.get_frequancy());
             // println!("cur {}, left {}, right {}", cur, left, right);
             self.nodes[cur].left_ = left;
             self.nodes[cur].right_ = right;
@@ -104,18 +98,16 @@ impl HuffmanTree {
         }
 
         path.push(false);
-        // self.build_map(self.nodes[current].left_, path);
         self.build_map(self.get_left(current), path);
         path.pop();
 
         path.push(true);
-        // self.build_map(self.nodes[current].right_, path);
         self.build_map(self.get_right(current), path);
         path.pop();
     }
 
     pub fn build_tree_from_text(&mut self, file : &str) {
-        let text = fs::read_to_string(file).unwrap();
+        let text = read_from_file(file);
         let mut map : HashMap<char, i32> = HashMap::new();
         for c in text.chars() {
             if map.contains_key(&c) {
@@ -151,18 +143,6 @@ impl HuffmanTree {
         //     }
         //     println!();
         // }
-
-        // let mut x : usize = self.root_;
-        // let mut y : usize = self.root_;
-        // for i in 0..4 {
-        //     x = self.get_right(x);
-        // }
-        // for i in 0..3 {
-        //     y = self.get_right(y);
-        // }
-        // y = self.get_left(y);
-        // println!("test {}", self.nodes[x].freq_.get_charactor());
-        // println!("test {}", self.nodes[y].freq_.get_charactor());
     }
 
     pub fn get_left(&self, idx :usize) -> usize {
@@ -171,5 +151,33 @@ impl HuffmanTree {
 
     pub fn get_right(&self, idx :usize) -> usize {
         return self.nodes[idx].right_;
+    }
+
+    pub fn get_bits_map(&self) -> &HashMap<String, Vec<bool>> {
+        return &self.bits_map_;
+    }
+
+    pub fn get_nodes(&self) -> &Vec<TreeNode> {
+        return &self.nodes;
+    }
+
+    pub fn get_root(&self) -> usize {
+        return self.root_;
+    }
+
+    pub fn set_root(&mut self, idx : usize) {
+        self.root_ = idx;
+    }
+
+    pub fn set_left(&mut self, cur : usize, left : usize) {
+        self.nodes[cur].left_ = left;
+    }
+
+    pub fn set_right(&mut self, cur : usize, right : usize) {
+        self.nodes[cur].right_ = right;
+    }
+
+    pub fn get_idx(&self) -> usize {
+        return self.idx;
     }
 }
