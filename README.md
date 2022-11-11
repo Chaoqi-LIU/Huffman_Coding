@@ -1,7 +1,5 @@
 # Huffman Encoding/Decoding
 
-### CS128 Honor (2022fall) Final Project
-
 This project is inspired by [lab_huffman](https://courses.engr.illinois.edu/cs225/fa2022/labs/huffman/) of CS225(2022fall) @ UIUC
 
 Team: \
