@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::thread::panicking;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
@@ -107,6 +108,9 @@ impl HuffmanTree {
 
     pub fn build_tree_from_text(&mut self, file : &str) {
         let text = read_from_file(file);
+        if text == "".to_string() {
+            panic!("empty text");
+        }
         let mut map : HashMap<char, i32> = HashMap::new();
         for c in text.chars() {
             if map.contains_key(&c) {
