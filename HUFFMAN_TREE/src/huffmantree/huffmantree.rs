@@ -1,6 +1,4 @@
-
 use std::collections::HashMap;
-use std::f32::MAX;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
