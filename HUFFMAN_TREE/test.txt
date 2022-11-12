@@ -1,1 +1,1 @@
-The Huffman encoding algorithm is a fundamental data compression algorithm.
+The Huffman encoding algorithm
