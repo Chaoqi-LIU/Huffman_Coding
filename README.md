@@ -17,7 +17,7 @@ The Huffman encoding algorithm is a fundamental data compression algorithm. Dat
 
 
 ## Huffman Tree Visualization
-Huffman tree built from the text : "The Huffman encoding algorithm is a fundamental data compression algorithm" was shown below
+Huffman tree built from the text "The Huffman encoding algorithm is a fundamental data compression algorithm" was shown below
 ```
                                                                                                 ______________________________ 74 _____________________________                                                                                                  
                                                                  ______________________________/                                                               \______________________________                                                                   
