@@ -17,7 +17,7 @@ The Huffman encoding algorithm is a fundamental data compression algorithm. Dat
 
 
 ## Sample
-<p>
+```
                                                                                                 ______________________________ 75 _____________________________                                                                                                  
                                                                  ______________________________/                                                               \______________________________                                                                   
                                                 ______________ 32 _____________                                                                                                ______________ 43 _____________                                                   
@@ -32,4 +32,4 @@ The Huffman encoding algorithm is a fundamental data compression algorithm. Dat
                  / \    / \                                                                                                                                                                                                                                      
                T:1.:1 p:1H:1                                                                                                                                                                                                                                     
 
-</p>
+```
