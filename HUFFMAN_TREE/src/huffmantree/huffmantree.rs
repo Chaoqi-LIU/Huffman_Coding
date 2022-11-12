@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::thread::panicking;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;

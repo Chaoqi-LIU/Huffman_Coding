@@ -1,5 +1,3 @@
-
-
 use super::frequency::Frequency;
 
 #[derive(Debug)]
