@@ -1,4 +1,6 @@
+
 use std::collections::HashMap;
+use std::f32::MAX;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
@@ -144,6 +146,100 @@ impl HuffmanTree {
         // }
     }
 
+    pub fn print_tree(&mut self) -> String {
+        if self.root_ == 0 {
+            return "(empty tree)".to_string();
+        }
+        let mut ret : String = "".to_string();
+
+        let height = self.get_height();
+        let print_matrix_width = (4 << height) - 3;
+        let print_matrix_height = 2 * height + 1;
+
+        let mut output : Vec<String> = vec!["".to_string(); print_matrix_height as usize];
+        for i in &mut output {
+            for _j in 0..(print_matrix_width + 4) {
+                i.push(' ');
+            }
+        }
+
+        self.print_subtree(self.root_, &mut output, 0, 0, print_matrix_width);
+
+        for i in output {
+            ret += &i;
+            ret += &"\n".to_string();
+        }
+        return ret;
+    }
+
+    fn print_subtree(&mut self, croot : usize, output : &mut Vec<String>, left : i32, top : i32, curr_width : i32) {
+        let mut node_str : String = "".to_string();
+        if self.get_left(croot) == 0 && self.get_right(croot) == 0 {
+            let mut s = self.get_node_at(croot).freq_.get_charactor();
+            if s == "\n" {
+                s = "\\n".to_string();
+            } else if s == " " {
+                s = "_".to_string();
+            } else if s == "\t" {
+                s = "\\t".to_string();
+            }
+            node_str = s + ":" + self.get_node_at(croot).freq_.get_frequancy().to_string().as_str();
+        } else {
+            node_str = self.get_node_at(croot).freq_.get_frequancy().to_string();
+        }
+        
+        let left_start_shift : i32 = 1 - (node_str.len() as i32 - 1) / 2;
+        let mut i : i32 = 0;
+        while i < node_str.len() as i32 && left + curr_width / 2 + i < output[top as usize].len() as i32 {
+            output[top as usize].replace_range((left + curr_width / 2 + left_start_shift + i) as usize..(left + curr_width / 2 + left_start_shift + i + 1) as usize,
+                               node_str.chars().nth(i as usize).unwrap().to_string().as_str());
+            i += 1;
+        }
+
+        // Calculate / \ offset = 2 ^ height
+        let branchoffset = (curr_width + 3) >> 3; // (1 << (node -> printData - 1));
+
+        // Print left child
+        let center = left + curr_width / 2;
+        let leftcenter = left + (curr_width / 2 - 1) / 2;
+        let rightcenter = left + curr_width / 2 + 2 + (curr_width / 2 - 1) / 2;
+        
+        if self.get_left(croot) != 0 {
+            let branch_pos = center - branchoffset + 1;
+            // draw left upper branch
+            let mut pos = center + left_start_shift - 2;
+            while pos > branch_pos {
+                output[top as usize].replace_range(pos as usize..(pos + 1) as usize, "_"); 
+                pos -= 1;
+            }
+            output[(top + 1) as usize].replace_range(branch_pos as usize..(branch_pos + 1) as usize, "/");
+            pos = branch_pos - 1;
+            while pos > leftcenter + 2 {
+                output[(top + 1) as usize].replace_range(pos as usize..(pos + 1) as usize, "_"); 
+                pos -= 1;
+            }
+            self.print_subtree(self.get_left(croot), output, left, top + 2, curr_width / 2 - 1);
+        }
+
+        if self.get_right(croot) != 0 {
+            let branch_pos = center + branchoffset + 1;
+            //draw right upper branch
+            let mut pos = center + left_start_shift + node_str.len() as i32 + 1;
+            while pos < branch_pos {
+                output[top as usize].replace_range(pos as usize..(pos + 1) as usize, "_"); 
+                pos += 1;
+            }
+            output[(top + 1) as usize].replace_range(branch_pos as usize..(branch_pos + 1) as usize, "\\");
+            pos = branch_pos + 1;
+            while pos < rightcenter {
+                output[(top + 1) as usize].replace_range(pos as usize..(pos + 1) as usize, "_"); 
+                pos += 1;
+            }
+            self.print_subtree(self.get_right(croot), output, left + curr_width / 2 + 1, top + 2, curr_width / 2 - 1);
+            
+        }
+    }
+
     pub fn get_left(&self, idx :usize) -> usize {
         return self.nodes[idx].left_;
     }
@@ -178,5 +274,19 @@ impl HuffmanTree {
 
     pub fn get_idx(&self) -> usize {
         return self.idx;
+    }
+
+    pub fn get_node_at(&self, idx : usize) -> &TreeNode {
+        return &self.nodes[idx];
+    }
+
+    pub fn get_height(&self) -> i32 {
+        return self.get_height_helper(self.root_);
+    }
+
+    fn get_height_helper(&self, current : usize) -> i32 {
+        if current == 0 { return -1; }
+        return 1 + std::cmp::max(self.get_height_helper(self.get_left(current)), 
+                                 self.get_height_helper(self.get_right(current)));
     }
 }

@@ -11,7 +11,11 @@ pub fn main() {
 
     let mut ht = HuffmanTree::new();
     ht.build_tree_from_text("test.txt");
-    write_huffmantree("output.txt", &ht);
+    let res = ht.print_tree();
+    println!("{res}");
+
+
+    // write_huffmantree("output.txt", &ht);
 
     // let res = encode(&ht, "12\n5".to_string());
     // println!("encoded as {}", res);
@@ -20,9 +24,9 @@ pub fn main() {
 
     // write_to_file("output.txt", text.clone());
 
-    let mut ht_new = HuffmanTree::new();
-    read_huffmantree("output.txt", &mut ht_new);
-    write_huffmantree("output2.txt", &ht_new);
+    // let mut ht_new = HuffmanTree::new();
+    // read_huffmantree("output.txt", &mut ht_new);
+    // write_huffmantree("output2.txt", &ht_new);
 
 
 
