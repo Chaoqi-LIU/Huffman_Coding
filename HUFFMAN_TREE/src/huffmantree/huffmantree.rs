@@ -88,10 +88,10 @@ impl HuffmanTree {
         path.pop();
     }
 
-    pub fn build_tree_from_text(&mut self, file : &str) {
-        let text = read_from_file(file).to_lowercase();
-        self.build_tree_from_string(text);
-    }
+    // pub fn build_tree_from_text(&mut self, file : &str) {
+    //     let text = read_from_file(file).to_lowercase();
+    //     self.build_tree_from_string(text);
+    // }
 
     pub fn build_tree_from_string(&mut self, text : String) {
         if text == "".to_string() {
@@ -211,49 +211,27 @@ impl HuffmanTree {
         }
     }
 
-    pub fn get_left(&self, idx :usize) -> usize {
-        return self.nodes[idx].left_;
-    }
+    pub fn get_left(&self, idx :usize) -> usize { return self.nodes[idx].left_; }
 
-    pub fn get_right(&self, idx :usize) -> usize {
-        return self.nodes[idx].right_;
-    }
+    pub fn get_right(&self, idx :usize) -> usize { return self.nodes[idx].right_; }
 
-    pub fn get_bits_map(&self) -> &HashMap<String, Vec<bool>> {
-        return &self.bits_map_;
-    }
+    pub fn get_bits_map(&self) -> &HashMap<String, Vec<bool>> { return &self.bits_map_; }
 
-    pub fn get_nodes(&self) -> &Vec<TreeNode> {
-        return &self.nodes;
-    }
+    pub fn get_nodes(&self) -> &Vec<TreeNode> { return &self.nodes; }
 
-    pub fn get_root(&self) -> usize {
-        return self.root_;
-    }
+    pub fn get_root(&self) -> usize { return self.root_; }
 
-    pub fn set_root(&mut self, idx : usize) {
-        self.root_ = idx;
-    }
+    pub fn set_root(&mut self, idx : usize) { self.root_ = idx; }
 
-    pub fn set_left(&mut self, cur : usize, left : usize) {
-        self.nodes[cur].left_ = left;
-    }
+    pub fn set_left(&mut self, cur : usize, left : usize) { self.nodes[cur].left_ = left; }
 
-    pub fn set_right(&mut self, cur : usize, right : usize) {
-        self.nodes[cur].right_ = right;
-    }
+    pub fn set_right(&mut self, cur : usize, right : usize) { self.nodes[cur].right_ = right; }
 
-    pub fn get_idx(&self) -> usize {
-        return self.idx;
-    }
+    pub fn get_idx(&self) -> usize { return self.idx; }
 
-    pub fn get_node_at(&self, idx : usize) -> &TreeNode {
-        return &self.nodes[idx];
-    }
+    pub fn get_node_at(&self, idx : usize) -> &TreeNode { return &self.nodes[idx]; }
 
-    pub fn get_height(&self) -> i32 {
-        return self.get_height_helper(self.root_);
-    }
+    pub fn get_height(&self) -> i32 { return self.get_height_helper(self.root_); }
 
     fn get_height_helper(&self, current : usize) -> i32 {
         if current == 0 { return -1; }

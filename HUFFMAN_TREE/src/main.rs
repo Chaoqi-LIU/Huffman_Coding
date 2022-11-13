@@ -12,19 +12,52 @@ mod ppm;
 
 pub fn main() {
 
-    // let mut ht = HuffmanTree::new();
-    // ht.build_tree_from_text("test.txt");
+    let mut ht = build_tree_from_text("test.txt");
+
+    // let x = ht.get_bits_map()[&".".to_string()].clone();
+    // for b in x {
+    //     if b {
+    //         print!("1 ");
+    //     } else {
+    //         print!("0 ");
+    //     }
+    // }
+    // println!("");
+
     // let res = ht.print_tree();
-    // println!("{res}");
+    let text = read_from_file("test.txt");
+    let res = encode(&ht, text);
+    println!("{res}");
 
-    let mut ippm = ImagePPM::new();
+    write_to_bfile("b.dat", res);
 
-    ippm.read_from_file("test.txt");
-    ippm.compress_to_file("output.dat", "huffmantree.txt");
+    let origin = read_from_bfile("b.dat");
+    println!("{}", &origin);
 
-    let mut ippm2 = ImagePPM::new();
-    ippm2.depress_from_file("output.dat", "huffmantree.txt");
-    ippm2.write_to_file("output.ppm");
+    println!("{}", decode(&ht, origin));
+
+
+
+
+    // let mut ht = build_tree_from_text("test.txt");
+    // let en =  encode(&ht, "there’s a way to simplify this process: 
+    // we can create a shortcut to a path with
+    // the use keyword once, and then use the 
+    // shorter name everywhere else in the scope go fuck.".to_string());
+    // println!("en : {}", &en);
+    
+    // let de = decode(&ht, en);
+    // println!("de : {}", &de);
+    
+
+    // let mut ippm = ImagePPM::new();
+
+    // ippm.read_from_file("test.txt");
+    // ippm.compress_to_file("output.dat", "huffmantree.txt");
+
+    // let mut ippm2 = ImagePPM::new();
+    // ippm2.depress_from_file("output.dat", "huffmantree.txt");
+    // ippm2.write_to_file("output.ppm");
     // write_huffmantree("output.txt", &ht);
 
     // let res = encode(&ht, "12\n5".to_string());

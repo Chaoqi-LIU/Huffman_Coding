@@ -4,7 +4,6 @@ use std::io::{Write, Error, BufRead};
 use std::cmp::PartialEq;
 use std::path::Path;
 
-
 use crate::huffmantree::huffmantree::HuffmanTree;
 
 use crate::bfile::bfile::*;
@@ -27,29 +26,17 @@ impl Pixel {
         }
     }
 
-    pub fn get_red(&self) -> i32 {
-        return self.red_;
-    }
+    pub fn get_red(&self) -> i32 { return self.red_; }
 
-    pub fn set_red(&mut self, red : i32) {
-        self.red_ = red;
-    }
+    pub fn set_red(&mut self, red : i32) { self.red_ = red; }
 
-    pub fn get_green(&self) -> i32 {
-        return self.green_;
-    }
+    pub fn get_green(&self) -> i32 { return self.green_; }
 
-    pub fn set_green(&mut self, green : i32) {
-        self.green_ = green;
-    }
+    pub fn set_green(&mut self, green : i32) { self.green_ = green; }
 
-    pub fn get_blue(&self) -> i32 {
-        return self.blue_;
-    }
+    pub fn get_blue(&self) -> i32 { return self.blue_; }
 
-    pub fn set_blue(&mut self, blue : i32) {
-        self.blue_ = blue;
-    }
+    pub fn set_blue(&mut self, blue : i32) { self.blue_ = blue; }
 
     fn eq(&self, other: &Self) -> bool {
         (self.red_== other.red_) && (self.green_ == other.green_) && (self.blue_ == other.blue_)

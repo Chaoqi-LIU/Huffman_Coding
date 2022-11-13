@@ -4,13 +4,56 @@ use std::fs;
 use std::fs::File;
 use std::io::{Write, Error};
 
+use std::io::BufWriter;
+use std::io::BufReader;
+use std::io::prelude::*;
+
+pub use bitbit::writer::BitWriter;
+pub use bitbit::reader::BitReader;
+pub use bitbit::reader::MSB;
+
+
 pub fn read_from_file(file : &str) -> String {
     return fs::read_to_string(file).unwrap();
+}
+
+pub fn read_from_bfile(bfile : & str) -> String {
+    let mut res = "".to_string();
+    let file = File::open(bfile);
+    let buf_reader = BufReader::new(file.unwrap());
+    let mut bit_reader : BitReader<_, MSB> = BitReader::new(buf_reader);
+    let mut bit = bit_reader.read_bit();
+    while (&bit).is_ok() {
+        if bit.unwrap() { res.push_str("1"); } 
+        else { res.push_str("0"); }
+        bit = bit_reader.read_bit();
+    }
+    return res;
 }
 
 pub fn write_to_file(file : &str, content : String) -> Result<(), Error> {
     let mut output = File::create(file)?;
     return write!(output, "{}", content);
+}
+
+pub fn write_to_bfile(bfile : &str, content : String) -> Result<(), Error> {
+    let bfile = File::create(bfile);
+    let mut buf_writer = BufWriter::new(bfile.unwrap());
+    let mut bit_writer = BitWriter::new(&mut buf_writer);
+
+    for bit in content.chars() {
+        if bit == '\0' { continue; }
+        bit_writer.write_bit(bit == '1').ok();
+    }
+    return buf_writer.flush();
+}
+
+
+pub fn build_tree_from_text(file : &str) -> HuffmanTree {
+    let mut huffman_tree = HuffmanTree::new();
+    let text = read_from_file(file);
+    huffman_tree.build_tree_from_string(text);
+    return huffman_tree;
 }
 
 pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<(), Error> {
