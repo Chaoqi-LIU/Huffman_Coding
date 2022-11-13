@@ -7,14 +7,24 @@ mod coder;
 use crate::bfile::bfile::*;
 mod bfile;
 
+use crate::ppm::ppm::ImagePPM;
+mod ppm;
+
 pub fn main() {
 
-    let mut ht = HuffmanTree::new();
-    ht.build_tree_from_text("test.txt");
-    let res = ht.print_tree();
-    println!("{res}");
+    // let mut ht = HuffmanTree::new();
+    // ht.build_tree_from_text("test.txt");
+    // let res = ht.print_tree();
+    // println!("{res}");
 
+    let mut ippm = ImagePPM::new();
 
+    ippm.read_from_file("test.txt");
+    ippm.compress_to_file("output.dat", "huffmantree.txt");
+
+    let mut ippm2 = ImagePPM::new();
+    ippm2.depress_from_file("output.dat", "huffmantree.txt");
+    ippm2.write_to_file("output.ppm");
     // write_huffmantree("output.txt", &ht);
 
     // let res = encode(&ht, "12\n5".to_string());

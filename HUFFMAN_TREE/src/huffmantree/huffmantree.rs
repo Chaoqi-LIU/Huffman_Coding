@@ -34,18 +34,6 @@ impl HuffmanTree {
     }
 
     pub fn remove_smallest(&self, single_queue : &mut Vec<usize>, merged_queue : &mut Vec<usize>) -> usize {
-        // println!("===========");
-        // println!("single q with size: {}", single_queue.len());
-        // for i in single_queue.iter() {
-        //     print!("| {} |", self.nodes[*i].freq_.get_charactor());
-        // }
-        // println!();
-        // println!("merged q with size: {}", merged_queue.len());
-        // for i in merged_queue.iter() {
-        //     print!("| {} |", self.nodes[*i].freq_.get_charactor());
-        // }
-        // println!();
-
         let to_return : usize;
         if single_queue.len() == 0 {
             to_return = merged_queue[0]; merged_queue.remove(0);
@@ -70,13 +58,8 @@ impl HuffmanTree {
         while single_queue.len() + merged_queue.len() >= 2 {
             let left = self.remove_smallest(&mut single_queue, &mut merged_queue);
             let right = self.remove_smallest(&mut single_queue, &mut merged_queue);
-            // println!("=========");
-            // println!("left -- char: {}, freq: {}", self.nodes[left].freq_.get_charactor(), self.nodes[left].freq_.get_frequancy());
-            // println!("right -- char: {}, freq: {}", self.nodes[right].freq_.get_charactor(), self.nodes[right].freq_.get_frequancy());
             let cur = self.insert(self.nodes[left].freq_.get_frequancy() + self.nodes[right].freq_.get_frequancy(), 
                                             String::from(self.nodes[left].freq_.get_charactor() + &self.nodes[right].freq_.get_charactor()));
-            // println!("parent -- char: {}, freq: {}", self.nodes[cur].freq_.get_charactor(), self.nodes[cur].freq_.get_frequancy());
-            // println!("cur {}, left {}, right {}", cur, left, right);
             self.nodes[cur].left_ = left;
             self.nodes[cur].right_ = right;
             merged_queue.push(cur);
@@ -107,6 +90,10 @@ impl HuffmanTree {
 
     pub fn build_tree_from_text(&mut self, file : &str) {
         let text = read_from_file(file).to_lowercase();
+        self.build_tree_from_string(text);
+    }
+
+    pub fn build_tree_from_string(&mut self, text : String) {
         if text == "".to_string() {
             panic!("empty text");
         }
@@ -127,24 +114,7 @@ impl HuffmanTree {
         frequencies.sort_by(|a, b| a.frequency_.partial_cmp(&b.frequency_).unwrap());
         
         self.build_tree(&frequencies);
-        // println!("root idx: {}", self.root_);
-        // for node in 0..self.nodes.len() {
-        //     println!("cur idx: {}, left idx: {}, right idx: {}, char: {}, freq: {}", node, self.nodes[node].left_, self.nodes[node].right_, self.nodes[node].freq_.get_charactor(), self.nodes[node].freq_.get_frequancy());
-        // }
         self.build_map(self.root_, &mut Vec::new());
-
-        // for mp in &self.bits_map_ {
-        //     println!("========");
-        //     println!("char: {}, freq: {}", mp.0, map[&mp.0.as_str().chars().nth(0).unwrap()]);
-        //     for d in mp.1 {
-        //         if *d {
-        //             print!("1 ");
-        //         } else {
-        //             print!("0 ");
-        //         }
-        //     }
-        //     println!();
-        // }
     }
 
     pub fn print_tree(&mut self) -> String {

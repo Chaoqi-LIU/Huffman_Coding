@@ -29,6 +29,17 @@ pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<
     return Ok(());
 }
 
+pub fn huffmantree_to_stirng(huffman_tree : &HuffmanTree) -> String {
+    let mut content : String = "".to_string();
+    for node in &huffman_tree.get_nodes()[1..(huffman_tree.get_idx() + 1)] {
+        content += &(node.left_.to_string() + &"|");
+        content += &(node.right_.to_string() + &"|");
+        content += &(node.freq_.get_frequancy().to_string() + &"|");
+        content += &(node.freq_.get_charactor().to_string() + &"🦀");
+    }
+    return content;
+}
+
 /*
 file_name
 ---------------------------------------------
@@ -42,9 +53,5 @@ pub fn write_huffmantree(file : &str, huffman_tree : &HuffmanTree) -> Result<(),
         ));
     }
     let mut output = File::create(file)?;
-    let mut result = Ok(());
-    for node in &huffman_tree.get_nodes()[1..(huffman_tree.get_idx() + 1)] {
-        result = write!(output, "{}|{}|{}|{}🦀", node.left_, node.right_, node.freq_.get_frequancy(), node.freq_.get_charactor());
-    }
-    return result;
+    return write!(output, "{}", huffmantree_to_stirng(huffman_tree));
 }
