@@ -106,7 +106,7 @@ impl HuffmanTree {
     }
 
     pub fn build_tree_from_text(&mut self, file : &str) {
-        let text = read_from_file(file);
+        let text = read_from_file(file).to_lowercase();
         if text == "".to_string() {
             panic!("empty text");
         }
