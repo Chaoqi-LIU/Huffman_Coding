@@ -6,7 +6,6 @@ use std::io::{Write, Error};
 
 use std::io::BufWriter;
 use std::io::BufReader;
-use std::io::prelude::*;
 
 pub use bitbit::writer::BitWriter;
 pub use bitbit::reader::BitReader;

@@ -1,8 +1,7 @@
 use std::fs;
 use std::fs::File;
-use std::io::{Write, Error, BufRead};
+use std::io::{Write, Error};
 use std::cmp::PartialEq;
-use std::path::Path;
 
 use crate::huffmantree::huffmantree::HuffmanTree;
 
