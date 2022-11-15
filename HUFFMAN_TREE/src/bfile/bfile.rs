@@ -60,7 +60,6 @@ pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<
     let mut idx : usize = 0;
     let mut reader = fs::read_to_string(file).unwrap();
     reader.pop();
-    // println!("reader: {}", reader);
     for line in reader.split("🦀") {
         let comps : Vec<&str> = line.split("|").collect();
         idx = huffman_tree.insert(comps[2].to_string().parse::<i32>().unwrap(), comps[3].to_string());
