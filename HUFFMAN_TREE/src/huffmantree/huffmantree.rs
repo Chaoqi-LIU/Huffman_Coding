@@ -2,8 +2,10 @@ use std::collections::HashMap;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
-
 use crate::bfile::bfile::*;
+use crate::mappers::*;
+use crate::map::*;
+use crate::reduce::*;
 
 #[derive(Debug)]
 pub struct HuffmanTree {
@@ -88,23 +90,17 @@ impl HuffmanTree {
         path.pop();
     }
 
-    // pub fn build_tree_from_text(&mut self, file : &str) {
-    //     let text = read_from_file(file).to_lowercase();
-    //     self.build_tree_from_string(text);
-    // }
+    pub fn build_tree_from_text(&mut self, file : &str) {
+        let text = read_from_file(file);
+        self.build_tree_from_string(text);
+    }
 
     pub fn build_tree_from_string(&mut self, text : String) {
-        if text == "".to_string() {
-            panic!("empty text");
-        }
-        let mut map : HashMap<char, i32> = HashMap::new();
-        for c in text.chars() {
-            if map.contains_key(&c) {
-                map.insert(c, map[&c] + 1);
-            } else {
-                map.insert(c, 1);
-            }
-        }
+        if text == "".to_string() { panic!("empty text"); }
+        
+        let num_chunks = (text.len() / 100) + 1;
+        let receiver = multi_threaded_mapper_generic::<char>(text, num_chunks, char_count_mapper.clone());
+        let map = thread_reducer(receiver);
         
         let mut frequencies = Vec::new();
         for pair in map.iter() {

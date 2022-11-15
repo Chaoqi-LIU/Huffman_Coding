@@ -81,36 +81,19 @@ impl ImagePPM {
         return write!(output, "{}", content);
     }
 
-    pub fn compress_to_file(&self, bfile : &str, output : &str) -> Result<(), Error>  {
+    pub fn compress_to_file(&self, bfile : &str, tree : &str) -> Result<(), Error>  {
         let mut huffman_tree : HuffmanTree = HuffmanTree::new();
         huffman_tree.build_tree_from_string(self.get_string());
         let mut result = Ok(());
-        result = write_to_file(output, huffmantree_to_stirng(&huffman_tree));
-        result = write_to_file(bfile, encode(&huffman_tree, self.get_string()));
+        result = write_to_file(tree, huffmantree_to_stirng(&huffman_tree));
+        result = write_to_bfile(bfile, encode(&huffman_tree, self.get_string()));
         return result;
     }
 
-    pub fn depress_from_file(&mut self, bfile : &str, output : &str) {
-        // let code = fs::read_to_string(bfile);
-        // let mut reader = fs::read_to_string(output);
-
-
-        let mut reader = fs::read_to_string(bfile).unwrap();
-        let mut comps : Vec<&str> = reader.split("🦀").collect();
-
-        let code = comps.last().unwrap().clone().to_string();
-
-        let mut huffman_tree = HuffmanTree::new();
-        let mut idx : usize = 0;
-        comps.pop();
-        for line in comps {
-            let elems : Vec<&str> = line.split("|").collect();
-            idx = huffman_tree.insert(elems[2].to_string().parse().unwrap(), elems[3].to_string());
-            huffman_tree.set_left(idx, elems[0].to_string().parse().unwrap());
-            huffman_tree.set_right(idx, elems[1].to_string().parse().unwrap());
-        }
-        huffman_tree.set_root(idx);
-        huffman_tree.build_map(huffman_tree.get_root(), &mut vec![]);
+    pub fn depress_from_file(&mut self, bfile : &str, tree : &str) {
+        let code = read_from_bfile(bfile);  // get the binary code for the ppm
+        let mut huffman_tree = HuffmanTree::new();  // get tree for depression
+        read_huffmantree(tree, &mut huffman_tree).ok();
         let ppm_str = decode(&huffman_tree, code);
         self.generate_ppm_with_string(ppm_str);
     }

@@ -17,9 +17,8 @@ pub fn encode(huffman_tree : &HuffmanTree, text : String) -> String {
         }
     }
     let mut diff = (8 - (output.len() % 8)) % 8;
-    println!("textlen : {}, diff : {}", text.len(), diff);
     for _i in 0..diff {
-        output = output + &"0";
+        output = "0".to_string()+ &output;
     }
     for _i in 0..8 {
         output = (diff & 1).to_string() + &output; 
