@@ -48,14 +48,21 @@ pub fn write_to_bfile(bfile : &str, content : String) -> Result<(), Error> {
 }
 
 
-pub fn build_tree_from_text(file : &str) -> HuffmanTree {
+pub fn build_tree_from_file(file : &str) -> HuffmanTree {
     let mut huffman_tree = HuffmanTree::new();
     let text = read_from_file(file);
     huffman_tree.build_tree_from_string(text);
     return huffman_tree;
 }
 
-pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<(), Error> {
+pub fn build_tree_from_text(text : String) -> HuffmanTree {
+    let mut huffman_tree = HuffmanTree::new();
+    huffman_tree.build_tree_from_string(text);
+    return huffman_tree;
+}
+
+pub fn read_huffmantree(file : &str) -> Result<HuffmanTree, Error> {
+    let mut huffman_tree = HuffmanTree::new();
     let mut idx : usize = 0;
     let mut reader = fs::read_to_string(file).unwrap();
     reader.pop();
@@ -67,7 +74,7 @@ pub fn read_huffmantree(file : &str, huffman_tree : &mut HuffmanTree) -> Result<
     }
     huffman_tree.set_root(idx);
     huffman_tree.build_map(huffman_tree.get_root(), &mut vec![]);
-    return Ok(());
+    return Ok(huffman_tree);
 }
 
 pub fn huffmantree_to_stirng(huffman_tree : &HuffmanTree) -> String {

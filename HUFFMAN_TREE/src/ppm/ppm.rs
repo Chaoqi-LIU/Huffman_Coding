@@ -89,10 +89,16 @@ impl ImagePPM {
         return result;
     }
 
+    pub fn compress_to_file_with_tree(&self, bfile : &str, tree : &str) -> Result<(), Error>  {
+        let huffman_tree : HuffmanTree = read_huffmantree(tree).unwrap();
+        let mut result = Ok(());
+        result = write_to_bfile(bfile, encode(&huffman_tree, self.get_string()));
+        return result;
+    }
+
     pub fn depress_from_file(&mut self, bfile : &str, tree : &str) {
         let code = read_from_bfile(bfile);  // get the binary code for the ppm
-        let mut huffman_tree = HuffmanTree::new();  // get tree for depression
-        read_huffmantree(tree, &mut huffman_tree).ok();
+        let mut huffman_tree = read_huffmantree(tree).unwrap();
         let ppm_str = decode(&huffman_tree, code);
         self.generate_ppm_with_string(ppm_str);
     }
@@ -112,6 +118,10 @@ impl ImagePPM {
             }
         }
         return ret;
+    }
+
+    pub fn generate_tree(&self) -> HuffmanTree {
+        return build_tree_from_text(self.get_string());
     }
 
     fn generate_ppm_with_string(&mut self, lines : String) {
