@@ -14,7 +14,7 @@ pub use bitbit::reader::MSB;
 use std::process::exit;
 
 pub fn file_error() {
-    println!("\nccheck file path or content style\n");
+    println!("\ncheck file path or content style\n");
     exit(0);
 }
 
