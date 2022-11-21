@@ -1,4 +1,4 @@
-use std::cmp::Ordering;
+// use std::cmp::Ordering;
 use std::cmp::PartialEq;
 
 
@@ -25,11 +25,11 @@ impl Frequency {
         self.frequency_
     }
 
-    fn eq(&self, other: &Self) -> bool {
-        (self.frequency_ == other.frequency_) && (self.charactor_ == other.charactor_)
-    }
+    // fn eq(&self, other: &Self) -> bool {
+    //     (self.frequency_ == other.frequency_) && (self.charactor_ == other.charactor_)
+    // }
 
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        self.frequency_.partial_cmp(&other.frequency_)
-    }
+    // fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+    //     self.frequency_.partial_cmp(&other.frequency_)
+    // }
 }

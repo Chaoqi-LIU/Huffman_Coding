@@ -2,7 +2,6 @@ use std::collections::HashMap;
 
 use crate::huffmantree::frequency::Frequency;
 use crate::huffmantree::treenode::TreeNode;
-use crate::bfile::bfile::*;
 use crate::mappers::*;
 use crate::map::*;
 use crate::reduce::*;
@@ -90,10 +89,21 @@ impl HuffmanTree {
         path.pop();
     }
 
-    pub fn build_tree_from_text(&mut self, file : &str) {
-        let text = read_from_file(file);
-        self.build_tree_from_string(text);
-    }
+    // pub fn build_tree_from_text(&mut self, file : &str) -> Result<(), Error> {
+    //     let text = read_from_file(file);d
+    //     match text {
+    //         Ok(text) => {
+    //             self.build_tree_from_string(text);
+    //             return Ok(());
+    //         }
+    //         Err(_) => {
+    //             return Err(Error::new(
+    //                 std::io::ErrorKind::Other,
+    //                 "cannot open file",
+    //             ));
+    //         }
+    //     }
+    // }
 
     pub fn build_tree_from_string(&mut self, text : String) {
         if text == "".to_string() { panic!("empty text"); }
@@ -140,7 +150,7 @@ impl HuffmanTree {
     }
 
     fn print_subtree(&mut self, croot : usize, output : &mut Vec<String>, left : i32, top : i32, curr_width : i32) {
-        let mut node_str : String = "".to_string();
+        let node_str;
         if self.get_left(croot) == 0 && self.get_right(croot) == 0 {
             let mut s = self.get_node_at(croot).freq_.get_charactor();
             if s == "\n" {
