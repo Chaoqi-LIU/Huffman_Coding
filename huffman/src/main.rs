@@ -138,12 +138,12 @@ pub fn main() {
                                         println!("Successfully write to {}", &args[5])
                                     },
                                     Err(_) => {
-                                        invalid_argument();
+                                        file_error();
                                     }
                                 }
                             },
                             Err(_) => {
-                                
+                                file_error()
                             }
                         }
                         
