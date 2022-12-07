@@ -3,6 +3,7 @@
 * Clone the repo ```git clone https://github.com/Chaoqi-LIU/Huffman_Coding```
 * Move to the dir ```cd huffman```
 * To see all operations provided ```cargo run -- help```
+
   <pre>
     -- help                                                 print this help message
     -- encode input_file -o output_file huffman_tree        encode the content in 'input_file'[.txt], write encoded content to 'output_file'[.dat], and save the huffman tree to 'huffman_tree'[.crab]
