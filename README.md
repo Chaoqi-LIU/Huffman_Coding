@@ -38,7 +38,7 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
   * d
 
 ## Possible Challenges
-* __N/A__
+&emsp;&emsp; __N/A__
 
 ## Reference
 &emsp;&emsp; This project is inspired by [lab_huffman](https://courses.engr.illinois.edu/cs225/fa2022/labs/huffman/) of CS225(2022fall) @ UIUC
