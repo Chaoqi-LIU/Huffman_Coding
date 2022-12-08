@@ -29,13 +29,29 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
 
 ## Technical Overview
 * __Data Structure__
-  * a
+  * The Huffman Trees' left paths represent a '0' in the binary message and taking a right path represents a '1'
+    <pre>
+           6
+       0 /   \ 1
+        E     4
+          0 /   \ 1
+           2     2
+        0 / \1 0/ \ 1
+         S   R C   T
+    </pre>
+  * The numbers in each node represent character frequencies. The number on each edge represent the direction taken on the tree. For insteance to encode 'S', the value is '100'.
 * __I/O__
-  * b
+  * Implemented the [serialization and deserialization](https://en.wikipedia.org/wiki/Serialization) of huffman tree
+  * Implemented reading/writing for both .txt and .dat file
 * __Coding Algorithms__
-  * c 
+  * Added one extra byte which represnets the number of complementary 0s followed by complementary 0s, then encoded content (bits) to prevent loss of information/bits due to binary files being quantified as bytes -- bits that are insufficient to form a byte will be lost
+    <pre>
+    actual valid bits:                  11100 10101100
+    bits written to file:   00000011 00011100 10101100
+    </pre>
 * __Optization__
-  * d
+  * Implemented [MapReduce](https://en.wikipedia.org/wiki/MapReduce) algorithm (multi-threaded mapper) to improve the efficiency of building a huffman tree
+  * Builded robust exception (panic) handling system
 
 ## Possible Challenges
 &emsp;&emsp; __N/A__
