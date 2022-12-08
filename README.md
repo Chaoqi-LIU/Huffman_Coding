@@ -29,15 +29,21 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
 
 ## Technical Overview
 * __Data Structure__
-  * The Huffman Trees' left paths represent a '0' in the binary message and taking a right path represents a '1'
+  * The Huffman Trees' left paths represent a '0' in the binary message and taking a right path as a '1'
     <pre>
-           6
-       0 /   \ 1
-        E     4
-          0 /   \ 1
-           2     2
-        0 / \1 0/ \ 1
-         S   R C   T
+                6 
+               / \
+             0/   \1
+             /     \ 
+           'E'    _ 4 _
+                 /     \
+               0/       \1
+               /         \ 
+              2           2
+             / \         / \
+           0/   \1     0/   \1
+           /     \     /     \
+         'S'     'R' 'C'     'T'
     </pre>
   * The numbers in each node represent character frequencies. The number on each edge represent the direction taken on the tree. For insteance to encode 'S', the value is '100'.
 * __I/O__
