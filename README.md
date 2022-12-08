@@ -41,7 +41,7 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
             /   \     /   \
           'S'   'R' 'C'   'T'
     </pre>
-  * The numbers in each node represent character frequencies. The number on each edge represent the direction taken on the tree. For insteance to encode 'S', the value is '100'.
+  * The numbers in each node represent character frequencies. The number on each edge represent the direction taken on the tree. For insteance to encode 'S', the value is '100'
 * __I/O__
   * Implemented the [serialization and deserialization](https://en.wikipedia.org/wiki/Serialization) of huffman tree
   * Implemented reading/writing for both .txt and .dat file
