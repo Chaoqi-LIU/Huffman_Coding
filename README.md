@@ -1,6 +1,8 @@
 # NanoRescueSquad 纳米救援小子 🚁
 &emsp;&emsp; -- Chaoqi LIU (chaoqil2@illinois.edu) \
-&emsp;&emsp; -- Jiahui LIN (jiahui9@illinois.edu)
+&emsp;&emsp; -- Jiahui LIN (jiahui9@illinois.edu) 
+
+<br />
 
 ## Intro to Huffman Coding
 
@@ -26,8 +28,10 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
                                                                                                                                                                                                                     p:1u:2                                       
 
 ```
+<br />
 
 ## Technical Overview
+
 * __Data Structure__
   * The Huffman Trees' left paths represent a '0' in the binary message and taking a right path as a '1'
     <pre>
@@ -42,12 +46,12 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
           'S'   'R' 'C'   'T'
     </pre>
   * The numbers in each node represent character frequencies. The number on each edge represent the direction taken on the tree. For insteance to encode 'S', the value is '100'
-<br></br>
+<br />
 
 * __I/O__
   * Implemented the [serialization and deserialization](https://en.wikipedia.org/wiki/Serialization) of huffman tree
   * Implemented reading/writing for both .txt and .dat file
-<br></br>
+<br />
   
 * __Coding Algorithms__
   * Added one extra byte which represnets the number of complementary 0s followed by complementary 0s, then encoded content (bits) to prevent loss of information/bits due to binary files being quantified as bytes -- bits that are insufficient to form a byte will be lost
@@ -55,14 +59,17 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
     actual valid bits:                  11100 10101100
     bits written to file:   00000011 00011100 10101100
     </pre>
+<br />
 
-<br></br>  
 * __Optization__
   * Implemented [MapReduce](https://en.wikipedia.org/wiki/MapReduce) algorithm (multi-threaded mapper) to improve the efficiency of building a huffman tree
   * Builded robust exception (panic) handling system
+<br />
 
 ## Possible Challenges
+
 &emsp;&emsp; __N/A__
+<br />
 
 ## User Guide
 
@@ -80,6 +87,7 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
     -- depress intput_file huffman_tree -o output_file      depress the image in 'input_file'[.dat] with 'huffman_tree'[.crab] provided, write depressed image to 'output_file'[.ppm]
     -- print huffman_tree                                   print the 'huffman_tree'[.crab]
   </pre>
+<br />
 
 ## Reference
 &emsp;&emsp; This project is inspired by [lab_huffman](https://courses.engr.illinois.edu/cs225/fa2022/labs/huffman/) of CS225(2022fall) @ UIUC
