@@ -73,6 +73,8 @@ Huffman tree built from the text "The Huffman encoding algorithm is a fundamenta
 
 ## User Guide
 
+&emsp;&emsp; __[Demo Video](https://www.youtube.com/watch?v=VuxoMrkrdvw)__
+
 * Clone the repo ```git clone https://github.com/Chaoqi-LIU/Huffman_Coding```
 * Move to the dir ```cd huffman```
 * To see all operations provided ```cargo run -- help```
