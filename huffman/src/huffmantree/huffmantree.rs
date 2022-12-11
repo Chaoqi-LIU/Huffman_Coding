@@ -108,7 +108,7 @@ impl HuffmanTree {
     pub fn build_tree_from_string(&mut self, text : String) {
         if text == "".to_string() { panic!("empty text"); }
         
-        let num_chunks = (text.len() / 100) + 1;
+        let num_chunks = (text.len() / 1000000) + 1;
         let receiver = multi_threaded_mapper_generic::<char>(text, num_chunks, char_count_mapper.clone());
         let map = thread_reducer(receiver);
         
